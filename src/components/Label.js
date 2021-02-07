@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Label = ({ label, idLabels, setIdLabels }) => {
   const [isSelected, setIsSelected] = useState(false);
+
+  useEffect(() => {
+    if (idLabels === '') {
+      setIsSelected(false);
+    }
+  }, [idLabels]);
 
   const selectLabel = () => {
     setIdLabels(idLabels ? `${idLabels},${label.id}` : `${label.id}`);

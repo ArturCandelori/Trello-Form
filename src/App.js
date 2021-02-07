@@ -19,7 +19,7 @@ console.log(process.env);
 const baseUrl = 'https://api.trello.com';
 const key = process.env.REACT_APP_API_KEY;
 const token = process.env.REACT_APP_API_TOKEN;
-const boardId = '601c710a7ce9358cfd8fd601';
+const boardId = '6020304886eef76a4c901f19';
 
 const Teste = () => {
   const [lists, setLists] = useState([]);
@@ -42,17 +42,16 @@ const Teste = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async ({
-    idList,
-    name,
-    desc,
-    due,
-    dueComplete,
-    pos,
-  }) => {
+  const handleSubmit = async (
+    { idList, name, desc, due, dueComplete, pos },
+    onSubmitProps
+  ) => {
     await axios.post(
       `${baseUrl}/1/cards?key=${key}&token=${token}&idList=${idList}&name=${name}&desc=${desc}&due=${due}&dueComplete=${dueComplete}&pos=${pos}&idLabels=${idLabels}`
     );
+
+    onSubmitProps.resetForm();
+    setIdLabels('');
   };
 
   return (
